@@ -50,7 +50,7 @@ class PersonneController extends AbstractController
             );
         }
 
-        return $this->render('personne/personne.html.twig', [
+        return $this->render('personne/details.html.twig', [
             "nom" => $personne->getNom(),
             "prenom" => $personne->getPrenom(),
             "kap" => $personne->getKap(),

@@ -54,17 +54,17 @@ class Jeu
     private $locations;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\editeur", inversedBy="jeux")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Editeur", inversedBy="jeux")
      */
     private $editeur;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\genre", inversedBy="jeux")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Genre", inversedBy="jeux")
      */
     private $genre;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\auteur", inversedBy="jeux")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Auteur", inversedBy="jeux")
      */
     private $auteur;
 
