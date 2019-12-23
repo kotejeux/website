@@ -29,7 +29,7 @@ class PersonneController extends AbstractController
         $personne->setKap("kotejeux");
 
         $form = $this->createFormBuilder($personne)
-            ->add("nom", TextType::class, ['label' => 'Nom*'])
+            ->add("nom", TextType::class, ['label' => 'Nom*', 'required' => false])
             ->add("prenom", TextType::class, ['required' => false])
             ->add("email", EmailType::class, ['required' => false])
             ->add("kap", TextType::class, ['required' => false])

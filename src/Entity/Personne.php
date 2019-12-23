@@ -6,6 +6,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
+use Symfony\Component\Validator\Constraints as Assert;
+
 /**
  * Personne
  *
@@ -16,7 +18,7 @@ class Personne
 {
     /**
      * @var int
-     *
+     *  
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
@@ -25,6 +27,8 @@ class Personne
 
     /**
      * @var string
+     * 
+     * @Assert\NotBlank
      *
      * @ORM\Column(name="Nom", type="string", length=20, nullable=false)
      */
