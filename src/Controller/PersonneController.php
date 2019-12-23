@@ -16,10 +16,12 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 class PersonneController extends AbstractController
 {
     /**
-     * @Route("/personne", name="add_personne")
+     * @Route("/personne/add", name="add_personne")
      */
     public function add_personn(Request $request)
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+
         $entityManager = $this->getDoctrine()->getManager();
 
         $personne = new Personne();
