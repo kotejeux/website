@@ -7,9 +7,9 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\AuteurRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\EditeurRepository")
  */
-class Auteur
+class Editeur
 {
     /**
      * @ORM\Id()
@@ -21,20 +21,20 @@ class Auteur
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $nom;
+    private $name;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="integer", nullable=true)
      */
-    private $prenom;
+    private $creationYear;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255)
      */
     private $nationalite;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Jeu", mappedBy="auteur")
+     * @ORM\OneToMany(targetEntity="App\Entity\Jeu", mappedBy="editeur")
      */
     private $jeux;
 
@@ -48,26 +48,26 @@ class Auteur
         return $this->id;
     }
 
-    public function getNom(): ?string
+    public function getName(): ?string
     {
-        return $this->nom;
+        return $this->name;
     }
 
-    public function setNom(string $nom): self
+    public function setName(string $name): self
     {
-        $this->nom = $nom;
+        $this->name = $name;
 
         return $this;
     }
 
-    public function getPrenom(): ?string
+    public function getCreationYear(): ?int
     {
-        return $this->prenom;
+        return $this->creationYear;
     }
 
-    public function setPrenom(?string $prenom): self
+    public function setCreationYear(?int $creationYear): self
     {
-        $this->prenom = $prenom;
+        $this->creationYear = $creationYear;
 
         return $this;
     }
@@ -77,7 +77,7 @@ class Auteur
         return $this->nationalite;
     }
 
-    public function setNationalite(?string $nationalite): self
+    public function setNationalite(string $nationalite): self
     {
         $this->nationalite = $nationalite;
 
@@ -96,7 +96,7 @@ class Auteur
     {
         if (!$this->jeux->contains($jeux)) {
             $this->jeux[] = $jeux;
-            $jeux->addAuteur($this);
+            $jeux->setEditeur($this);
         }
 
         return $this;
@@ -106,7 +106,10 @@ class Auteur
     {
         if ($this->jeux->contains($jeux)) {
             $this->jeux->removeElement($jeux);
-            $jeux->removeAuteur($this);
+            // set the owning side to null (unless already changed)
+            if ($jeux->getEditeur() === $this) {
+                $jeux->setEditeur(null);
+            }
         }
 
         return $this;
