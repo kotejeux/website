@@ -46,11 +46,6 @@ class Jeu
     /**
      * @ORM\Column(type="integer")
      */
-    private $anne;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
     private $annee;
 
     /**
@@ -141,18 +136,6 @@ class Jeu
     public function setDuree(int $duree): self
     {
         $this->duree = $duree;
-
-        return $this;
-    }
-
-    public function getAnne(): ?int
-    {
-        return $this->anne;
-    }
-
-    public function setAnne(int $anne): self
-    {
-        $this->anne = $anne;
 
         return $this;
     }
