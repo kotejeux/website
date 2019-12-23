@@ -4,17 +4,21 @@ namespace App\Controller;
 
 
 use App\Entity\Personne;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class PersonneController extends AbstractController
 {
     /**
      * @Route("/personne", name="add_personne")
      */
-    public function add_personn()
+    public function add_personn(Request $request)
     {
         $entityManager = $this->getDoctrine()->getManager();
 
@@ -23,14 +27,28 @@ class PersonneController extends AbstractController
         $personne->setPrenom("Jean");
         $personne->setEmail("jeanvanneste@gmail.com");
         $personne->setKap("kotejeux");
+
+        $form = $this->createFormBuilder($personne)
+            ->add("nom", TextType::class, ['label' => 'Nom*'])
+            ->add("prenom", TextType::class, ['required' => false])
+            ->add("email", EmailType::class, ['required' => false])
+            ->add("kap", TextType::class, ['required' => false])
+            ->add('save', SubmitType::class, ["label" => "Enregistrer la personne"])
+            ->getForm();
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $personne = $form->getData();
+
+            $entityManager->persist($personne);
+
+            $entityManager->flush();
+
+            return $this->redirectToRoute('confirmation', ['id' => $personne->getId(), 'entity' => 'personne']);
+        }
         
-        $entityManager->persist($personne);
-
-        $entityManager->flush();
-
-        return $this->render("confirmation.html.twig", [
-            'entity' => "Personne",
-            "id" => $personne->getId(),
+        return $this->render("personne/new.html.twig", [
+            'form' => $form->createView(),
         ]);
     }
 
