@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}Kotéjeux{% endblock %}</title>
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
@@ -23,6 +23,12 @@
         <div id="content">
             {% block body %}{% endblock %}
         </div>
+        <footer>
+            {% block footer %}
+                <a href="index">Page principale</a>
+                <a href="about">À propos</a>
+            {% endblock %}
+        </footer>
         {% block javascripts %}{% endblock %}
     </body>
 </html>
