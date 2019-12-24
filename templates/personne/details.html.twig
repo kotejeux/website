@@ -2,13 +2,18 @@
 {% block content %}
 <table>
     <tr>
-        <td>Nom</td><td>{{ nom }}</td>
+        <td>Nom</td><td>{{ personne.nom }}</td>
     </tr>
     <tr>
-        <td>Prénom</td><td>{{ prenom }}</td>
+        <td>Prénom</td><td>{{ personne.prenom }}</td>
     </tr>
-        <td>Kàp</td><td>{{ kap }}</td>
+        <td>Kàp</td><td>{{ personne.kap }}</td>
     </tr>
+    {% if is_granted("ROLE_USER") %}
+        <tr>
+            <td>Email</td><td>{{ personne.email }}</td>
+        </tr>
+    {% endif %}
 </table>
 <h3>Historique des locations</h3>
 

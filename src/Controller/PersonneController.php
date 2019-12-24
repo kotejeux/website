@@ -20,7 +20,7 @@ class PersonneController extends AbstractController
      */
     public function add_personn(Request $request)
     {
-        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+        $this->denyAccessUnlessGranted('ROLE_USER');
 
         $entityManager = $this->getDoctrine()->getManager();
 
@@ -71,9 +71,7 @@ class PersonneController extends AbstractController
         }
 
         return $this->render('personne/details.html.twig', [
-            "nom" => $personne->getNom(),
-            "prenom" => $personne->getPrenom(),
-            "kap" => $personne->getKap(),
+            "personne" => $personne
         ]);
     }
 }
