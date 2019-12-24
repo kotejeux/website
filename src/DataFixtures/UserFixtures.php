@@ -25,7 +25,7 @@ class UserFixtures extends Fixture
 
         $user->setPassword($this->passwordEncoder->encodePassword(
             $user,
-            'CentreOecuC4'
+            'kej'
         ));
 
         $manager->persist($user);
