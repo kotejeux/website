@@ -8,8 +8,8 @@
     <body>
     <h1>Kotejeux</h1>
         <nav id="subtitle">
-            {% if not is_granted("IS_AUTHENTICATED_FULLY") %}<a href="/login">Login</a>{% endif %}
-            {% if is_granted("IS_AUTHENTICATED_FULLY") %}<a href="/logout">Disconnect</a>{% endif %}
+            {% if not is_granted("IS_AUTHENTICATED_FULLY") %}<a href="/login">Connexion</a>{% endif %}
+            {% if is_granted("IS_AUTHENTICATED_FULLY") %}<a href="/logout">Déconnexion</a>{% endif %}
         </nav>
         <nav id="sidebar">
             {% block sidebar %}
