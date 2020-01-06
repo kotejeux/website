@@ -25,10 +25,6 @@ class PersonneController extends AbstractController
         $entityManager = $this->getDoctrine()->getManager();
 
         $personne = new Personne();
-        $personne->setNom("Vanneste");
-        $personne->setPrenom("Jean");
-        $personne->setEmail("jeanvanneste@gmail.com");
-        $personne->setKap("kotejeux");
 
         $form = $this->createFormBuilder($personne)
             ->add("nom", TextType::class, ['label' => 'Nom*', 'required' => false])

@@ -37,6 +37,11 @@ class User implements UserInterface
      */
     private $email;
 
+    /**
+     * @ORM\Column(type="string", length=32, nullable=true, unique=true)
+     */
+    private $connectionToken;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -115,5 +120,17 @@ class User implements UserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    public function getConnectionToken(): ?string
+    {
+        return $this->connectionToken;
+    }
+
+    public function setConnectionToken(?string $connectionToken): self
+    {
+        $this->connectionToken = $connectionToken;
+
+        return $this;
     }
 }
