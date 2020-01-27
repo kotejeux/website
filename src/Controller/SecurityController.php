@@ -4,19 +4,16 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\CreateUserType;
-use App\Controller\MailerController;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
-use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use Symfony\Component\Mailer\MailerInterface;
-use Symfony\Component\Mime\Email;
-use Symfony\Component\Mailer\Transport;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mailer\Mailer;
-
+use Symfony\Component\Mailer\Transport;
+use Symfony\Component\Mime\Address;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class SecurityController extends AbstractController
 {
@@ -50,8 +47,7 @@ class SecurityController extends AbstractController
         $form = $this->createForm(CreateUserType::class);
 
         $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid())
-        {
+        if ($form->isSubmitted() && $form->isValid()) {
             $user = $form->getData();
 
             $user->setPassword(
@@ -61,14 +57,14 @@ class SecurityController extends AbstractController
                 )
             );
             $token = $user->setConnectionToken(bin2hex(random_bytes(10)));
-            
+
             $entityManager->persist($user);
             $entityManager->flush();
 
             $this->send_authentication_email($user->getEmail(), $user->getConnectionToken());
-        } 
+        }
 
-        return $this->render('user/new.html.twig',[
+        return $this->render('user/new.html.twig', [
             'form' => $form->createView(),
         ]);
     }
@@ -83,7 +79,8 @@ class SecurityController extends AbstractController
     /**
      * @Route("/user/test")
      */
-    public function test_user_routing(){
+    public function test_user_routing()
+    {
         return $this->render("test_page.html.twig");
     }
 
@@ -91,12 +88,27 @@ class SecurityController extends AbstractController
     {
         $transport = Transport::fromDsn($_SERVER["MAILER_DSN"]);
         $mailer = new Mailer($transport);
-        $email = (new Email())
+        $email = (new TemplatedEmail())
             ->from("noreply@kotejeux.be")
-            ->to($email)
+            ->to(new Address($email))
             ->subject("[KEJ] Créez votre mot de passe")
-            ->text($connection_token);
-        
+            ->html('
+                <h1>Create your password</h1>
+
+                <p>Someone created an account for this email address</p>
+
+                <p>
+                    If it was you, you can set your password on clicking the following <a href=http://localhost:8000/user/confirm/'.$connection_token.'>link</a>.
+                </p>
+                <p>
+                    If the link doesn\'t work, copy paste in your browser.
+                    <code>http://localhost:8000/user/confirm/'.$connection_token.'</code>
+                </p>
+                <p>
+                    If it wasn\'t you, you can ignore this email
+                </p>
+            ');
+
         $sent_mail = $mailer->send($email);
     }
 
