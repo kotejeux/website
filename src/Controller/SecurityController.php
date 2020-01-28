@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\CreateUserType;
+use App\Form\UserConfirmationType;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -82,6 +83,54 @@ class SecurityController extends AbstractController
     public function test_user_routing()
     {
         return $this->render("test_page.html.twig");
+    }
+
+    /**
+     * @Route("/user/confirm/{security_token}", name="userConfirmation")
+     */
+    public function confirm_user(Request $request, UserPasswordEncoderInterface $passwordEncoder, String $security_token)
+    {
+        $repository = $this->getDoctrine()->getRepository(User::class);
+        
+        $user = $repository->findOneBy(["connectionToken" => $security_token]);
+
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $userInfo = new User();
+
+        $form = $this->createForm(UserConfirmationType::class);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $userInfo = $form->getData();
+
+            if ($userInfo->getPassword() == $form->get("confirm_password")->getData()){
+                $user->setPassword(
+                    $passwordEncoder->encodePassword(
+                        $user,
+                        $userInfo->getPassword()
+                    )
+
+                );
+                $user->setConnectionToken(NULL);
+
+                $entityManager->persist($user);
+                $entityManager->flush();
+            }
+            else {
+                return $this->render('user/password.html.twig', [
+                    'username' =>$user->getUsername(),
+                    'form' => $form->createView(),
+                    'error' => "Les mots de passe ne correspondent pas."
+                ]);
+            }
+        }
+
+        return $this->render('user/password.html.twig', [
+            'username' => $user->getUsername(),
+            'form' => $form->createView(),
+        ]);
     }
 
     private function send_authentication_email(String $email, String $connection_token)
