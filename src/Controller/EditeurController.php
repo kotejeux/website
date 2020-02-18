@@ -15,8 +15,9 @@ class EditeurController extends AbstractController
      */
     public function index()
     {
+        $editeurs = $this->getDoctrine()->getRepository(Editeur::class)->findAll();
         return $this->render('editeur/index.html.twig', [
-            'controller_name' => 'EditeurController',
+            'editeurs' => $editeurs,
         ]);
     }
 
@@ -33,7 +34,7 @@ class EditeurController extends AbstractController
 
         $form = $this->createForm(CreateEditeurType::class);
         $form->handleRequest($request);
-        
+
         if ($form->isSubmitted() && $form->isValid()) {
             $editeur = $form->getData();
 
