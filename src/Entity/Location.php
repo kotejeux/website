@@ -17,7 +17,7 @@ class Location
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\personne", inversedBy="locations")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Personne", inversedBy="locations")
      * @ORM\JoinColumn(nullable=false)
      */
     private $personne;
