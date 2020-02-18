@@ -16,7 +16,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 class PersonneController extends AbstractController
 {
     /**
-     * @Route("/personne/add", name="add_personne")
+     * @Route("/personne/add", name="personne_add")
      */
     public function add_personn(Request $request)
     {
