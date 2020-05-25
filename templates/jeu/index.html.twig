@@ -1,0 +1,13 @@
+{% extends 'jeu/layout.html.twig' %}
+
+{% block title %}Liste des jeux{% endblock %}
+
+{% block page_title %}<h2>Liste des jeux</h2>{% endblock %}
+
+{% block content %}
+<ul>
+    {% for jeu in jeux %}
+        <a href="jeu//{{ jeu.id }}"><li>{{ jeu.titre }}</li></a>
+    {% endfor %}
+</ul>
+{% endblock %}
