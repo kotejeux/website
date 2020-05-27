@@ -18,7 +18,18 @@ class JeuFixtures extends Fixture
         $jeu->setAnnee(2011);
 
         $manager->persist($jeu);
+        
+        /*
+        $jeu = new Jeu();
+        $jeu->setTitre("Citadelles");
+        $jeu->setJoueursMin(3);
+        $jeu->setJoueursMax(7);
+        $jeu->setDuree(60);
+        $jeu->setAnnee(2000);
 
+        $manager->persist($jeu);
+        */
+        
         $manager->flush();
     }
 }

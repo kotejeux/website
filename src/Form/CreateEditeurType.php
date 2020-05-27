@@ -6,6 +6,7 @@ use App\Entity\Editeur;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\CountryType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -17,8 +18,10 @@ class CreateEditeurType extends AbstractType
     {
         $builder
             ->add('name', TextType::class)
-            ->add('creationYear', NumberType::class)
-            ->add('nationalite', TextType::class)
+            ->add('creationYear', NumberType::class, [
+                'required' => false,
+            ])
+            ->add('nationalite', CountryType::class)
             ->add('Save', SubmitType::class)
         ;
     }

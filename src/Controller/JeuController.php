@@ -50,4 +50,23 @@ class JeuController extends AbstractController
             "form" => $form->createView(),
         ]);
     }
+
+    /**
+     * @Route("jeu/{id}", name="jeu_show")
+     */
+    public function show_jeu(int $id)
+    {
+        $jeu = $this->getDoctrine()->getRepository(Jeu::class)->find($id);
+        if (!$jeu)
+        {
+            throw $this->createNotFoundError(
+                "Pas de jeu avec l'id ".$id
+            );
+        }
+
+        return $this->render("jeu/details.html.twig", [
+            "jeu" => $jeu,
+            "editeur" => $jeu->getEditeur(),
+        ]);
+    }
 }

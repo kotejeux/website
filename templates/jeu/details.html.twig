@@ -1,0 +1,27 @@
+{% extends "jeu/layout.html.twig" %}
+{% block content %}
+<table>
+    <tr>
+        <td>Titre</td>
+        <td>{{ jeu.titre }}</td>
+    </tr><tr>
+        <td>Description</td>
+        <td>{{ jeu.description }}</td>
+    </tr><tr>
+        <td>Joueurs</td>
+        <td>De {{ jeu.joueursMin }} à {{ jeu.joueursMax }}</td>
+    </tr><tr>
+        <td>Durée</td>
+        <td>{{ jeu.duree }} min.</td>
+    </tr><tr>
+        <td>Année de sortie</td>
+        <td>{{ jeu.annee}}</td>
+    {% if editeur %}
+    </tr><tr>
+        <td>Éditeur</td>
+        <td>{{ editeur.name }}</td>
+    </tr>
+    {% endif %}
+    <!-- TODO: ajouter auteur -->
+</table>
+{% endblock %}
