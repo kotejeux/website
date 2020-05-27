@@ -111,4 +111,10 @@ class Auteur
 
         return $this;
     }
+
+    public function getCompleteName(): ?string
+    {
+        $completeName = $this->getPrenom() . ' ' . $this->GetNom();
+        return $completeName; 
+    }
 }
