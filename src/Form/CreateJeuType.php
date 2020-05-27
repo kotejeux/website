@@ -21,7 +21,9 @@ class CreateJeuType extends AbstractType
     {
         $builder
             ->add('titre', TextType::class)
-            ->add('description', TextType::class)
+            ->add('description', TextType::class, [
+                "required" => false,
+            ])
             ->add('joueurs_min', IntegerType::class)
             ->add('joueurs_max', IntegerType::class)
             ->add('duree', IntegerType::class)
@@ -29,18 +31,21 @@ class CreateJeuType extends AbstractType
             ->add('editeur', EntityType::class, [
                 'class' => Editeur::class,
                 'choice_label' => 'name',
+                'required' => false,
             ])
             ->add('genre', EntityType::class, [
                 'class' => Genre::class,
                 'choice_label' => "genre",
                 'multiple' => true,
                 'expanded' => true,
+                'required' => false,
             ])
             ->add('auteur', EntityType::class, [
                 'class' => Auteur::class,
                 'choice_label' => "getCompleteName",
                 'multiple' => true,
                 'expanded' => true,
+                'required' => false,
             ])
             ->add('save', SubmitType::class);
     }

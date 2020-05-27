@@ -5,7 +5,7 @@
 {% block page_title %}<h2>Liste des jeux</h2>{% endblock %}
 
 {% block content %}
-{% if is_granted("ROLE_KEJ") %}<a href="jeu/add">Ajouter un jeu</a>{% endif %}
+{% if is_granted("ROLE_KEJ") %}<a href="jeu/add">Ajouter un nouveau jeu</a>{% endif %}
 <ul>
     {% for jeu in jeux %}
         <a href="jeu//{{ jeu.id }}"><li>{{ jeu.titre }}</li></a>

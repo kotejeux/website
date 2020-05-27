@@ -11,7 +11,7 @@ class GenreFixture extends Fixture
     public function load(ObjectManager $manager)
     {
         $genre = new Genre();
-        $genre->setGenre('default');
+        $genre->setGenre('strategy');
         $manager->persist($genre);
 
         $manager->flush();

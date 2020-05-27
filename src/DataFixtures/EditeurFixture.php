@@ -10,11 +10,6 @@ class EditeurFixture extends Fixture
 {
     public function load(ObjectManager $manager)
     {
-        $editeur = new Editeur();
-        $editeur->setName('default');
-        $editeur->setNationalite('default');
-        $manager->persist($editeur);
-
         $manager->flush();
     }
 }
