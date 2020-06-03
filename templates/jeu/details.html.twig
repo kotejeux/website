@@ -1,4 +1,13 @@
 {% extends "jeu/layout.html.twig" %}
+{% block script %}
+<script>
+function confirm_delete_jeu() {
+    if (confirm("Supprimer le jeu ?\nAttention, cette action est définitive !")) {
+        window.location.replace("{{ jeu.id }}/delete");
+    }
+}
+</script>
+{% endblock %}
 {% block content %}
 <table>
     <tr>
@@ -25,6 +34,6 @@
     <!-- TODO: ajouter auteur -->
     <!-- TODO: ajouter genre -->
 </table>
-{% if is_granted("ROLE_KEJ") %}<a href="{{ jeu.id }}/edit/">Modifier</a>{% endif %}
-{% if is_granted("ROLE_KEJ") %}<a href="{{ jeu.id }}/delete/">Supprimer</a>{% endif %}
+{% if is_granted("ROLE_KEJ") %}<button onclick="document.location = '{{ jeu.id }}/edit'">Modifier</a>{% endif %}
+{% if is_granted("ROLE_KEJ") %}<button onclick="confirm_delete_jeu()">Supprimer</a>{% endif %}
 {% endblock %}
