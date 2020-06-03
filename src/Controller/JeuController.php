@@ -71,7 +71,7 @@ class JeuController extends AbstractController
     }
 
     /**
-     * @Route("jeu/{id}/edit", name="edit_jeu")
+     * @Route("jeu/{id}/edit", name="jeu_edit")
      */
     public function update_jeu(int $id, Request $request)
     {
@@ -107,7 +107,7 @@ class JeuController extends AbstractController
     }
 
     /**
-     * @Route("jeu/{id}/delete", name="delete_jeu")
+     * @Route("jeu/{id}/delete", name="jeu_delete")
      */
     public function delete_jeu($id)
     {
