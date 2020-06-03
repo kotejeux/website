@@ -5,6 +5,7 @@
 {% block page_title %}<h2>Liste des éditeurs</h2>{% endblock %}
 
 {% block content %}
+{% if is_granted("ROLE_KEJ") %}<a href="editeur/add/">Ajouter un éditeur</a>{% endif %}
 <ul>
     {% for editeur in editeurs %}
         <a href="editeur/{{ editeur.id }}"><li>{{ editeur.name }}</li></a>

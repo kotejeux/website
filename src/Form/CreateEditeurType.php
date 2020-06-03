@@ -21,7 +21,9 @@ class CreateEditeurType extends AbstractType
             ->add('creationYear', NumberType::class, [
                 'required' => false,
             ])
-            ->add('nationalite', CountryType::class)
+            ->add('nationalite', CountryType::class, [
+                "required" => false,
+            ])
             ->add('Save', SubmitType::class)
         ;
     }
