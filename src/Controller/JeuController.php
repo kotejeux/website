@@ -69,4 +69,40 @@ class JeuController extends AbstractController
             "editeur" => $jeu->getEditeur(),
         ]);
     }
+
+    /**
+     * @Route("jeu/{id}/edit", name="edit_jeu")
+     */
+    public function update_jeu(int $id, Request $request)
+    {
+        $this->denyAccessUnlessGranted("ROLE_KEJ");
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $jeu = $entityManager->getRepository(Jeu::class)->find($id);
+
+        if(!$jeu)
+        {
+            throw $this->createNotFoundException(
+                "Pas de jeu correspondant à l'id ".$id
+            );
+        }
+
+        $form = $this->createForm(CreateJeuType::class, $jeu);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid())
+        {
+            $jeu = $form->getData();
+            $entityManager->persist($jeu);
+            $entityManager->flush();
+
+            return $this->redirectToRoute("jeu_show", ['id' => $id]);
+        }
+
+        return $this->render("jeu/update.html.twig", [
+            "jeu" => $jeu,
+            "form" => $form->createView(),
+        ]);
+
+    }
 }
