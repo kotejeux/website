@@ -1,4 +1,6 @@
 {
+    "name": "kotjeux-website",
+    "description": "The website used to manage the games and location of the kotejeux project.",
     "type": "project",
     "license": "proprietary",
     "require": {
