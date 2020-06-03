@@ -10,6 +10,7 @@ class AuteurFixtures extends Fixture
 {
     public function load(ObjectManager $manager)
     {
+        /*
         $auteur = new Auteur();
         
         // Set characteristics 
@@ -17,7 +18,7 @@ class AuteurFixtures extends Fixture
         $auteur->setNationalite('default');
 
         $manager->persist($auteur);
-
+        */
         $auteur = new Auteur();
 
         $auteur->setNom('Faidutti');
