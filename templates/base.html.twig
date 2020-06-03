@@ -5,6 +5,7 @@
         <title>{% block title %}Kotéjeux{% endblock %}</title>
         <link href="{{ asset('css/error.css') }}" rel="stylesheet"/>
         {% block stylesheets %}{% endblock %}
+        {% block script %}<script src="{{ asset("scripts.js") }}"></script>{% endblock %}
     </head>
     <body>
     <h1>Kotejeux</h1>

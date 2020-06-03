@@ -105,4 +105,23 @@ class JeuController extends AbstractController
         ]);
 
     }
+
+    /**
+     * @Route("jeu/{id}/delete", name="delete_jeu")
+     */
+    public function delete_jeu($id)
+    {
+        $this->denyAccessUnlessGranted("ROLE_KEJ");
+
+        $em = $this->getDoctrine()->getManager();
+        $jeu = $em->getRepository(Jeu::class)->find($id);
+
+        $em->remove($jeu);
+        $em->flush();
+
+        return $this->render("confirmation_delete.html.twig", [
+            "id" => $id,
+            "entity" => "jeu",
+        ]);
+    }
 }

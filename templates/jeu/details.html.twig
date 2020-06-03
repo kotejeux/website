@@ -26,4 +26,5 @@
     <!-- TODO: ajouter genre -->
 </table>
 {% if is_granted("ROLE_KEJ") %}<a href="{{ jeu.id }}/edit/">Modifier</a>{% endif %}
+{% if is_granted("ROLE_KEJ") %}<a href="{{ jeu.id }}/delete/">Supprimer</a>{% endif %}
 {% endblock %}
