@@ -48,6 +48,37 @@ class EditeurController extends AbstractController
         return $this->render("editeur/new.html.twig", [
             'form' => $form->createView(),
         ]);
+    }
 
+    /**
+     * @Route("/editeur/{id}/edit/", name="editeur_edit")
+     */
+    public function edit_editeur(int $id, Request $request)
+    {
+        $this->denyAccessUnlessGranted("ROLE_KEJ");
+
+        $em = $this->getDoctrine()->getManager();
+        $editeur = $em->getRepository(Editeur::class)->find($id);
+
+        if (!$editeur) {
+            throw $this->createNotFoundException(
+                'No editeur found for id '.$id
+            );
+        }
+
+        $form = $this->createForm(CreateEditeurType::class, $editeur);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $editeur = $form->getData();
+            $em->flush();
+            
+            return $this->redirectToRoute("confirmation", ['id' => $id, 'entity' => 'editeur']);
+        }
+
+        return $this->render('editeur/update.html.twig', [
+            'form' => $form->createView(),
+            'editeur' => $editeur,
+        ]);
     }
 }

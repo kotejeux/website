@@ -1,0 +1,9 @@
+{% extends 'editeur/layout.html.twig' %}
+
+{% block title %}Modifier un éditeur{% endblock %}
+
+{% block page_title %}<h2>Modifier l'éditeur{{ editeur.name }}</h2>{% endblock %}
+
+{% block content %}
+    {{ form(form) }}
+{% endblock %}
