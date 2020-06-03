@@ -20,14 +20,24 @@ class CreateJeuType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('titre', TextType::class)
+            ->add('titre', TextType::class, [
+                "label" => "Nom du jeu *"
+            ])
             ->add('description', TextType::class, [
                 "required" => false,
             ])
-            ->add('joueurs_min', IntegerType::class)
-            ->add('joueurs_max', IntegerType::class)
-            ->add('duree', IntegerType::class)
-            ->add('annee', IntegerType::class)
+            ->add('joueurs_min', IntegerType::class, [
+                "label" => "Nombre de joueurs minimum *",
+            ])
+            ->add('joueurs_max', IntegerType::class, [
+                "label" => "Nombre de joueurs maximum *",
+            ])
+            ->add('duree', IntegerType::class, [
+                "label" => "Durée en minute *",
+            ])
+            ->add('annee', IntegerType::class, [
+                "label" => "Année de sortie",
+            ])
             ->add('editeur', EntityType::class, [
                 'class' => Editeur::class,
                 'choice_label' => 'name',
