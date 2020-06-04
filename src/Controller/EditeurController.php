@@ -51,6 +51,25 @@ class EditeurController extends AbstractController
     }
 
     /**
+     * @Route("/editeur/{id}/", name="editeur_show")
+     */
+    public function show_editeur(int $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $editeur = $em->getRepository(Editeur::class)->find($id);
+
+        if (!$editeur) {
+            throw $this->createNotFoundException(
+                "Pas d'éditeurs correspondant à l'id ".$id
+            );
+        }
+
+        return $this->render("editeur/details.html.twig", [
+            'editeur' => $editeur,
+        ]);
+    }
+
+    /**
      * @Route("/editeur/{id}/edit/", name="editeur_edit")
      */
     public function edit_editeur(int $id, Request $request)

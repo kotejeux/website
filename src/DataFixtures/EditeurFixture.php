@@ -12,7 +12,7 @@ class EditeurFixture extends Fixture
     {
         $editeur = new Editeur;
         $editeur->setName("Millenium");
-        $editeur->setNationalite("France");
+        $editeur->setNationalite("FR");
         
         $manager->persist($editeur);
 

@@ -1,0 +1,17 @@
+{% extends "editeur/layout.html.twig" %}
+{% block content %}
+<table>
+    <tr>
+        <td>Nom</td>
+        <td>{{ editeur.name }}</td>
+    </tr><tr>
+        <td>Nationalité</td>
+        <td>{{ editeur.nationalite }}</td>
+    </tr><tr>
+        <td>Année de création</td>
+        <td>{{ editeur.creationYear }}</td>
+    </tr>
+    <!-- TODO: ajouter jeux -->
+</table>
+{% if is_granted("ROLE_KEJ") %}<button onclick="document.location = 'edit'">Modifier</button>{% endif %}
+{% endblock %}
