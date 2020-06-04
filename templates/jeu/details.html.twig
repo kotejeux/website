@@ -34,6 +34,6 @@ function confirm_delete_jeu() {
     <!-- TODO: ajouter auteur -->
     <!-- TODO: ajouter genre -->
 </table>
-{% if is_granted("ROLE_KEJ") %}<button onclick="document.location = '{{ jeu.id }}/edit'">Modifier</a>{% endif %}
-{% if is_granted("ROLE_KEJ") %}<button onclick="confirm_delete_jeu()">Supprimer</a>{% endif %}
+{% if is_granted("ROLE_KEJ") %}<button onclick="document.location = '{{ jeu.id }}/edit'">Modifier</button>{% endif %}
+{% if is_granted("ROLE_KEJ") %}<button onclick="confirm_delete_jeu()">Supprimer</button>{% endif %}
 {% endblock %}
