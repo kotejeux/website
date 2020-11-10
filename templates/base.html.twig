@@ -10,49 +10,55 @@
 		<link href="{{ asset('css/style.css') }}" rel="stylesheet"/> {% block stylesheets %}{% endblock %}
 		</head>
 		<body>
-			<header>
-				<h1>Kotejeux</h1>
-				<nav id="subtitle">
-					{% if not is_granted("IS_AUTHENTICATED_FULLY") %}
-						<a href="/login">Connexion</a>
-					{% endif %}
-					{% if is_granted("IS_AUTHENTICATED_FULLY") %}
-						<a href="/logout">Déconnexion</a>
-					{% endif %}
-				</nav>
-			</header>
-			<nav id="sidebar">
-				{% block sidebar %}
-					<ul>
-						<li>
-							<a href="{{ path('index') }}">Home</a>
-						</li>
-						<li>
-							<a href="{{ path('jeu') }}">Jeux</a>
-						</li>
-						<!--
-						<li><a href="{{ path('editeur') }}">Éditeurs</a></li>
-						-->
-                        {% if is_granted("ROLE_KEJ") %}
-						<li>
-							<a href="">Locations</a>
-						</li>
-                        {% endif %}
-						<li>
-							<a href="{{ path('blog_index') }}">Blog</a>
-						</li>
-					</ul>
-				{% endblock %}
-			</nav>
-
-			<div id="content"> {% block body %}{% endblock %}
-				</div>
-				<footer>
-					{% block footer %}
-						<a href="index">Page principale</a>
-						<a href="about">À propos</a>
+			<div id="bloc_page">
+				<header>
+					<div id="main_title">
+						<div class="logo">
+							<img src="{{ asset('pictures/logo.svg') }}" alt="Logo du KEJ"/>
+						</div>
+						<h1>Kotejeux</h1>
+					</div>
+					<nav id="subtitle">
+						{% if not is_granted("IS_AUTHENTICATED_FULLY") %}
+							<a href="/login">Connexion</a>
+						{% endif %}
+						{% if is_granted("IS_AUTHENTICATED_FULLY") %}
+                        <p> Vous êtes connecté(e) en tant que <strong>{{ app.user.username }}</strong></p>
+							<a href="/logout">Déconnexion</a>
+						{% endif %}
+					</nav>
+				</header>
+				<nav id="sidebar">
+					{% block sidebar %}
+						<ul>
+							<li>
+								<a href="{{ path('index') }}">Home</a>
+							</li>
+							<li>
+								<a href="{{ path('jeu') }}">Jeux</a>
+							</li>
+							<!--<li><a href="{{ path('editeur') }}">Éditeurs</a></li>-->
+							{% if is_granted("ROLE_KEJ") %}
+								<li>
+									<a href="">Locations</a>
+								</li>
+							{% endif %}
+							<li>
+								<a href="{{ path('blog_index') }}">Blog</a>
+							</li>
+						</ul>
 					{% endblock %}
-				</footer>
+				</nav>
+
+				<div id="content"> {% block body %}{% endblock %}
+					</div>
+					<footer>
+						{% block footer %}
+							<a href="index">Page principale</a>
+							<a href="about">À propos</a>
+						{% endblock %}
+					</footer>
+				</div>
 				{% block javascripts %}{% endblock %}
 			</body>
 		</html>
