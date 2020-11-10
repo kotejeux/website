@@ -4,21 +4,25 @@
         <meta charset="UTF-8"/>
         <title>{% block title %}Kotéjeux{% endblock %}</title>
         <link href="{{ asset('css/error.css') }}" rel="stylesheet"/>
+        <link href="{{ asset('css/style.css') }}" rel="stylesheet"/>
         {% block stylesheets %}{% endblock %}
-        {% block script %}<script src="{{ asset("scripts.js") }}"></script>{% endblock %}
     </head>
     <body>
-    <h1>Kotejeux</h1>
+    <header>
+        <h1>Kotejeux</h1>
         <nav id="subtitle">
             {% if not is_granted("IS_AUTHENTICATED_FULLY") %}<a href="/login">Connexion</a>{% endif %}
             {% if is_granted("IS_AUTHENTICATED_FULLY") %}<a href="/logout">Déconnexion</a>{% endif %}
         </nav>
+        </header>
         <nav id="sidebar">
             {% block sidebar %}
             <ul>
                 <li><a href="{{ path('index') }}">Home</a></li>
                 <li><a href="{{ path('jeu') }}">Jeux</a></li>
+                <!--
                 <li><a href="{{ path('editeur') }}">Éditeurs</a></li>
+                -->
                 <li><a href="{{ path('blog_index') }}">Blog</a></li>
             </ul>
             {% endblock %}

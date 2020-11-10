@@ -1,0 +1,39 @@
+body {
+  margin: 0;
+  padding-left: 16px;
+  margin-right: 10px;
+}
+
+header {
+  background-color: lightgrey;
+  margin-top: 0;
+  padding: 0 16px 10 24px;
+}
+
+#sidebar ul {
+  list-style-type: none;
+  list-style-position: inside;
+  padding: 0 0;
+  max-width: max-content;
+}
+
+#sidebar li {
+  border: 1px solid black;
+  padding: 2px 5px;
+}
+
+#sidebar {
+  font-size: 20px;
+}
+
+footer {
+  text-align: center;
+  background-color: grey;
+  padding: 10px;
+}
+
+footer a {
+  color: white;
+  text-decoration: none;
+  margin: 0 10px;
+}
