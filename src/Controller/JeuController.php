@@ -15,7 +15,7 @@ class JeuController extends AbstractController
      */
     public function index()
     {
-        $jeux = $this->getDoctrine()->getRepository(Jeu::Class)->findAll();
+        $jeux = $this->getDoctrine()->getRepository(Jeu::Class)->findBy([], array('titre' => 'ASC'));
 
         return $this->render('jeu/index.html.twig', [
             'jeux' => $jeux,
