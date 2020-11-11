@@ -6,6 +6,7 @@
 			{% block title %}Kotéjeux
 			{% endblock %}
 		</title>
+		<link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&family=Open+Sans&display=swap" rel="stylesheet">
 		<link href="{{ asset('css/error.css') }}" rel="stylesheet"/>
 		<link href="{{ asset('css/style.css') }}" rel="stylesheet"/> {% block stylesheets %}{% endblock %}
 		</head>
@@ -23,7 +24,10 @@
 							<a href="/login">Connexion</a>
 						{% endif %}
 						{% if is_granted("IS_AUTHENTICATED_FULLY") %}
-                        <p> Vous êtes connecté(e) en tant que <strong>{{ app.user.username }}</strong></p>
+							<p>
+								Vous êtes connecté(e) en tant que
+								<strong>{{ app.user.username }}</strong>
+							</p>
 							<a href="/logout">Déconnexion</a>
 						{% endif %}
 					</nav>
