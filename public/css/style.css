@@ -1,7 +1,5 @@
 body {
   margin: 0;
-  padding-left: 16px;
-  margin-right: 10px;
   background-color: #fdf6e3;
 }
 
@@ -11,28 +9,44 @@ header {
   padding: 10px 16px 10px 24px;
 }
 
-#sidebar {
-  max-width: max-content;
-}
-
 #sidebar ul {
   list-style-type: none;
-  list-style-position: inside;
   padding: 0 0;
-  max-width: max-content;
+  margin: 0;
+  background-color: #333;
   display: flex;
 }
 
 #sidebar li {
-  padding: 2px 5px;
-  margin: 0 15px;
+  margin: 0;
+  display: inline;
+  float: left;
+}
+
+#sidebar li a {
+  display: block;
+  color: white;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+#sidebar li a:hover {
+  background-color: #111;
 }
 
 #sidebar {
-  font-size: 20px;
+  font-size: 16px;
+  width: 100%;
+}
+
+#content {
+  margin: 0 20px 15px;
 }
 
 footer {
+  bottom: 0;
+  width: 100%;
+  height: 25px;
   text-align: center;
   background-color: grey;
   padding: 10px;
@@ -52,7 +66,7 @@ footer a {
 
 #main_title {
   display: flex;
-  font-family: 'Amatic SC', cursive;
+  font-family: "Amatic SC", cursive;
   font-size: 25px;
 }
 
@@ -61,5 +75,40 @@ footer a {
 }
 
 article {
-  margin: 10px 0;
+}
+
+#content {
+  border: 1px solid black;
+  max-width: max-content;
+  padding: 10px;
+  margin: auto;
+}
+
+#content h2 {
+  text-align: center;
+}
+
+#content article {
+  padding: 0 10px;
+  border: 1px solid red;
+}
+
+#content aside {
+  border: 1px solid blue;
+  max-width: max-content;
+}
+
+#content aside button {
+  padding: 10px 24px;
+  cursor: pointer;
+  display: block;
+  width: 100%;
+}
+
+.sidebyside {
+  display: flex;
+}
+
+p {
+  border: 1px solid green;
 }

@@ -8,45 +8,47 @@ window.location.replace("{{ jeu.id }}/delete");
 }
 	</script>
 {% endblock %}
+{% block page_title %}
+	<h2>{{ jeu.titre|capitalize }}</h2>
+{% endblock %}
 {% block content %}
-	<table>
-		<tr>
-			<td>Titre</td>
-			<td>{{ jeu.titre }}</td>
-		</tr>
-		<tr>
-			<td>Description</td>
-			<td>{{ jeu.description }}</td>
-		</tr>
-		<tr>
-			<td>Joueurs</td>
-			<td>De
-				{{ jeu.joueursMin }}
-				à
-				{{ jeu.joueursMax }}</td>
-		</tr>
-		<tr>
-			<td>Durée</td>
-			<td>{{ jeu.duree }}
-				min.</td>
-		</tr>
-		<tr>
-			<td>Année de sortie</td>
-			<td>{{ jeu.annee}}</td>
-			{% if editeur %}
-			</tr>
-		</tr>
-		<tr>
-			<td>Éditeur</td>
-			<td>{{ editeur.name }}</td>
-		</tr>
+<div class='sidebyside'>
+	<article>
+		<p>
+			De
+			{{ jeu.joueursMin }}
+			à
+			{{ jeu.joueursMax }}
+			joueurs.
+		</p>
+		<p>Durée :
+			{{ jeu.duree }}
+			min.
+		</p>
+		{% if jeu.annee %}
+			<p>Sortie en
+				{{ jeu.annee }}</p>
+		{% endif %}
+		{% if editeur %}
+			<p>Édité par
+				{{editeur.name}}
+			</p>
+		{% endif %}
+		{% if jeu.description %}
+			<p>
+				Description :<br/>
+				{{ jeu.description }}</p>
+		{% endif %}
+
+		<!-- TODO: ajouter auteur -->
+		<!-- TODO: ajouter genre -->
+	</article>
+	{% if is_granted("ROLE_KEJ") %}
+		<aside>
+			<button onclick="document.location = '{{ jeu.id }}/edit'">Modifier</button>
+			<button onclick="confirm_delete_jeu()">Supprimer</button>
+			<button>Nouvelle location</button>
+		</aside>
 	{% endif %}
-	<!-- TODO: ajouter auteur -->
-	<!-- TODO: ajouter genre -->
-</table>
-{% if is_granted("ROLE_KEJ") %}
-	<button onclick="document.location = '{{ jeu.id }}/edit'">Modifier</button>
-{% endif %}
-{% if is_granted("ROLE_KEJ") %}
-	<button onclick="confirm_delete_jeu()">Supprimer</button>
-{% endif %}{% endblock %}
+	</div>
+{% endblock %}
