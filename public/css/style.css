@@ -46,11 +46,20 @@ footer a {
 
 .logo img {
   margin-right: 10px;
-  width: 60px;
-  height: 60px;
+  width: 80px;
+  height: 80px;
 }
 
 #main_title {
   display: flex;
   font-family: 'Amatic SC', cursive;
+  font-size: 25px;
+}
+
+#main_title h1 {
+  margin: 25px 0 0 0;
+}
+
+article {
+  margin: 10px 0;
 }
