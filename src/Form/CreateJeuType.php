@@ -37,6 +37,7 @@ class CreateJeuType extends AbstractType
             ])
             ->add('annee', IntegerType::class, [
                 "label" => "Année de sortie",
+                "required" => false,
             ])
             ->add('editeur', EntityType::class, [
                 'class' => Editeur::class,
