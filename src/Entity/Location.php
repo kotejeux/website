@@ -18,7 +18,7 @@ class Location
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Personne", inversedBy="locations")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $personne;
 
@@ -42,6 +42,26 @@ class Location
      * @ORM\Column(type="boolean")
      */
     private $paye;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $nom;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $mail;
+
+    /**
+     * @ORM\Column(type="string", length=15, nullable=true)
+     */
+    private $phone;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $ok;
 
     public function getId(): ?int
     {
@@ -104,6 +124,54 @@ class Location
     public function setPaye(bool $paye): self
     {
         $this->paye = $paye;
+
+        return $this;
+    }
+
+    public function getNom(): ?string
+    {
+        return $this->nom;
+    }
+
+    public function setNom(string $nom): self
+    {
+        $this->nom = $nom;
+
+        return $this;
+    }
+
+    public function getMail(): ?string
+    {
+        return $this->mail;
+    }
+
+    public function setMail(?string $mail): self
+    {
+        $this->mail = $mail;
+
+        return $this;
+    }
+
+    public function getPhone(): ?string
+    {
+        return $this->phone;
+    }
+
+    public function setPhone(?string $phone): self
+    {
+        $this->phone = $phone;
+
+        return $this;
+    }
+
+    public function getOk(): ?bool
+    {
+        return $this->ok;
+    }
+
+    public function setOk(bool $ok): self
+    {
+        $this->ok = $ok;
 
         return $this;
     }
