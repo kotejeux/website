@@ -39,10 +39,6 @@ header {
   width: 100%;
 }
 
-#content {
-  margin: 0 20px 15px;
-}
-
 footer {
   bottom: 0;
   width: 100%;
@@ -74,11 +70,7 @@ footer a {
   margin: 25px 0 0 0;
 }
 
-article {
-}
-
 #content {
-  border: 1px solid black;
   max-width: max-content;
   padding: 10px;
   margin: auto;
@@ -119,4 +111,16 @@ article {
 
 table {
   border-collapse: collapse;
+}
+
+h2 {
+  font-family: 'Open Sans', sans-serif;
+}
+
+p {
+  font-family: 'Roboto', sans-serif;
+}
+
+a {
+  font-family: 'Roboto', sans-serif;
 }

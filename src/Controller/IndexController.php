@@ -16,6 +16,9 @@ class IndexController extends AbstractController
         return $this->render('index.html.twig');
     }
 
+    /**
+     * @Route("/")
+     */
     public function to_mainpage()
     {
         return $this->redirectToRoute("index");
