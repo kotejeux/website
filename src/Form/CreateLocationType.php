@@ -17,13 +17,20 @@ class CreateLocationType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $today = new \DateTimeImmutable();
         $builder
             ->add('jeu', EntityType::class, [
                 'class' => Jeu::class,
                 'choice_label' => "titre",
             ])
-            ->add('date_debut', DateType::class)
-            ->add('date_fin', DateType::class)
+            ->add('date_debut', DateType::class, [
+                'widget' => 'single_text',
+                'data' => $today,
+            ])
+            ->add('date_fin', DateType::class, [
+                'widget' => 'single_text',
+                'data' => date_add(new \DateTime, (new \DateInterval("P7D"))),
+            ])
             ->add('paye', ChoiceType::class, [
                 'choices' => [
                     'Oui' => true,
