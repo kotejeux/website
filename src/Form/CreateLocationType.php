@@ -36,6 +36,8 @@ class CreateLocationType extends AbstractType
                     'Oui' => true,
                     'Non' => false,
                 ],
+                'expanded' => true,
+                'label' => 'Payé ?'
             ])
             ->add('nom', TextType::class)
             ->add('mail', TextType::class, [
