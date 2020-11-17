@@ -18,13 +18,15 @@ class CreateLocationType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $this->jeu_default = $options['jeu_default'];
         $builder
             ->add('jeu', EntityType::class, [
                 'class' => Jeu::class,
                 'query_builder' => function (EntityRepository $er) {
                     return $er->createQueryBuilder('u')->orderBy('u.titre', 'ASC');
                 },
-                'choice_label' => "titre",
+                'choice_label' => 'titre',
+                'data' => $this->jeu_default,
             ])
             ->add('date_debut', DateType::class, [
                 'widget' => 'single_text',
@@ -56,6 +58,7 @@ class CreateLocationType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Location::class,
+            'jeu_default' => null,
         ]);
     }
 }
