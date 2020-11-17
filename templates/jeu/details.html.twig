@@ -47,7 +47,7 @@
 		<aside>
 			<button onclick="document.location = '{{ jeu.id }}/edit'">Modifier</button>
 			<button onclick="confirm_delete_jeu()">Supprimer</button>
-			<button>Nouvelle location</button>
+			<button onclick="document.location = '{{ path("location_add", {jeu: jeu.id}) }}'">Nouvelle location</button>
 		</aside>
 	{% endif %}
 	</div>

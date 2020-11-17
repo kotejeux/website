@@ -37,6 +37,10 @@ class LocationController extends AbstractController
         if ($jeuId) {
             $jeu = $this->getDoctrine()->getRepository(Jeu::class)->find($jeuId);
         }
+        elseif ($request->query->get("jeu")) {
+            $jeuId = $request->query->get("jeu");
+            $jeu = $this->getDoctrine()->getRepository(Jeu::class)->find($jeuId);
+        }
 
         $location = new Location();
 
