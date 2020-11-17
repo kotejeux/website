@@ -19,8 +19,10 @@ class LocationController extends AbstractController
     {
         $this->denyAccessUnlessGranted("ROLE_KEJ");
 
+        $locations = $this->getDoctrine()->getRepository(Location::Class)->findBy(array('ok' => false));
+
         return $this->render('location/index.html.twig', [
-            'controller_name' => 'LocationController',
+            'locations' => $locations,
         ]);
     }
 

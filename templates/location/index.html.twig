@@ -5,6 +5,7 @@
 
 {% block body %}
 	<h2>Locations en cours</h2>
+	<button onclick="document.location =  'location/add'">Nouvelle location</button>
 	<table id="current_locations">
 		<thead>
 			<tr>
@@ -17,5 +18,20 @@
 				<th scope="col"></th>
 			</tr>
 		</thead>
+		{% for location in locations %}
+			<tr>
+				<td>{{ location.id }}</td>
+				<td>{{ location.jeu.titre }}</td>
+				<td>{{ location.nom }}</td>
+				<td></td>
+				<td></td>
+				{% if location.paye == 1 %}
+				<td>Oui</td>
+				{% else %}
+				<td>Non</td>
+				{% endif %}
+				<td><button>Détails</button></td>
+			</tr>
+		{% endfor %}
 	</table>
 {% endblock %}
