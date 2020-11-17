@@ -45,8 +45,8 @@
 			</p>
 		</article>
 		<aside>
-			<button>Paiement reçu</button>
-			<button>Jeu rendu</button>
+			<button onclick="document.location = '{{ path("location_paiement", {"id": location.id}) }}'">Paiement reçu</button>
+			<button onclick="document.location = '{{path("location_retour", {"id": location.id}) }}'">Jeu rendu</button>
 			<button>Modifier location</button>
 		</aside>
 	</div>
