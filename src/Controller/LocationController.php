@@ -2,14 +2,13 @@
 
 namespace App\Controller;
 
+use App\Entity\Jeu;
+use App\Entity\Location;
+use App\Form\CreateLocationType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-
-use App\Entity\Location;
-use App\Entity\Jeu;
-use App\Form\CreateLocationType;
 
 class LocationController extends AbstractController
 {
@@ -20,7 +19,7 @@ class LocationController extends AbstractController
     {
         $this->denyAccessUnlessGranted("ROLE_KEJ");
 
-        $locations = $this->getDoctrine()->getRepository(Location::Class)->findBy(array('ok' => false));
+        $locations = $this->getDoctrine()->getRepository(Location::class)->findBy(array('ok' => false));
 
         return $this->render('location/index.html.twig', [
             'locations' => $locations,
@@ -28,15 +27,16 @@ class LocationController extends AbstractController
     }
 
     /**
-     * @Route("/location/add", name="location_add")
+     * @Route("/location/add/{jeuId}", name="location_add")
      */
-    public function add_location(Request $request)
+    public function add_location(Request $request, $jeuId = null)
     {
         $this->denyAccessUnlessGranted("ROLE_KEJ");
+        $jeu = null;
 
-        $jeuId = $request->query->get('jeu');
-
-        $jeu = $this->getDoctrine()->getRepository(Jeu::class)->find($jeuId);
+        if ($jeuId) {
+            $jeu = $this->getDoctrine()->getRepository(Jeu::class)->find($jeuId);
+        }
 
         $location = new Location();
 
@@ -49,7 +49,6 @@ class LocationController extends AbstractController
             $location = $form->getData();
             $location->setOk(false);
 
-
             $entityManager->persist($location);
             $entityManager->flush();
 
@@ -60,4 +59,6 @@ class LocationController extends AbstractController
             "form" => $form->createView(),
         ]);
     }
+
+
 }
