@@ -1,0 +1,53 @@
+{% extends 'location/layout.html.twig' %}
+{% block page_title %}
+	<h2>Location</h2>
+{% endblock %}
+{% block content %}
+	<div class="sidebyside">
+		<article>
+			<p>
+				<strong>Jeu :
+				</strong>
+				{{ location.jeu.titre }}
+			</p>
+			<p>
+				<strong>Loué par :</strong>
+				{{ location.nom }}</p>
+			{% if location.mail %}
+				- Mail :
+				{{ location.mail }}
+			{% endif %}
+			{% if location.phone %}
+				- Phone :
+				{{ location.phone }}
+			{% endif %}
+			<p>
+				Du
+				{{ location.dateDebut.format('d M y') }}
+				au
+				{{ location.dateFin.format('d M y') }}
+			</p>
+			<p>
+				<strong>Payé :
+				</strong>
+				{% if location.paye == 1 %}
+					Oui
+				{% else %}
+					Non
+				{% endif %}
+			</p>
+			<p>Rendu :
+				{% if location.ok == 1 %}
+					Oui
+				{% else %}
+					Non
+				{% endif %}
+			</p>
+		</article>
+		<aside>
+			<button>Paiement reçu</button>
+			<button>Jeu rendu</button>
+			<button>Modifier location</button>
+		</aside>
+	</div>
+{% endblock %}

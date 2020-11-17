@@ -36,8 +36,7 @@ class LocationController extends AbstractController
 
         if ($jeuId) {
             $jeu = $this->getDoctrine()->getRepository(Jeu::class)->find($jeuId);
-        }
-        elseif ($request->query->get("jeu")) {
+        } elseif ($request->query->get("jeu")) {
             $jeuId = $request->query->get("jeu");
             $jeu = $this->getDoctrine()->getRepository(Jeu::class)->find($jeuId);
         }
@@ -64,5 +63,17 @@ class LocationController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("location/{id}", name="location_show")
+     */
+    public function show_location(int $id)
+    {
+        $this->denyAccessUnlessGranted("ROLE_KEJ");
 
+        $location = $this->getDoctrine()->getRepository(Location::class)->find($id);
+
+        return $this->render("location/details.html.twig", [
+            "location" => $location,
+        ]);
+    }
 }

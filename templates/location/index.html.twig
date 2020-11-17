@@ -5,7 +5,6 @@
 
 {% block body %}
 	<h2>Locations en cours</h2>
-	<button onclick="document.location =  'location/add'">Nouvelle location</button>
 	<table id="current_locations">
 		<thead>
 			<tr>
@@ -26,12 +25,15 @@
 				<td>{{ location.dateDebut.format("d-m-y") }}</td>
 				<td>{{ location.dateFin.format("d-m-y") }}</td>
 				{% if location.paye == 1 %}
-				<td>Oui</td>
+					<td>Oui</td>
 				{% else %}
-				<td>Non</td>
+					<td>Non</td>
 				{% endif %}
-				<td><button>Détails</button></td>
+				<td>
+					<button onclick="document.location = '{{ path('location_show', {'id' : location.id}) }}'">Détails</button>
+				</td>
 			</tr>
 		{% endfor %}
 	</table>
+	<button class="bottom_button" onclick="document.location = 'location/add'">Nouvelle location</button>
 {% endblock %}
