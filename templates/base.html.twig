@@ -46,7 +46,7 @@
 							<!--<li><a href="{{ path('editeur') }}">Éditeurs</a></li>-->
 							{% if is_granted("ROLE_KEJ") %}
 								<li>
-									<a href="">Locations</a>
+									<a href="{{ path('location') }}">Locations</a>
 								</li>
 							{% endif %}
 							<li>
