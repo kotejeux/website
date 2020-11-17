@@ -18,21 +18,23 @@
 			</tr>
 		</thead>
 		{% for location in locations %}
-			<tr>
-				<td>{{ location.id }}</td>
-				<td>{{ location.jeu.titre }}</td>
-				<td>{{ location.nom }}</td>
-				<td>{{ location.dateDebut.format("d-m-y") }}</td>
-				<td>{{ location.dateFin.format("d-m-y") }}</td>
-				{% if location.paye == 1 %}
-					<td>Oui</td>
-				{% else %}
-					<td>Non</td>
-				{% endif %}
-				<td>
-					<button onclick="document.location = '{{ path('location_show', {'id' : location.id}) }}'">Détails</button>
-				</td>
-			</tr>
+			<tbody>
+				<tr>
+					<td>{{ location.id }}</td>
+					<td>{{ location.jeu.titre }}</td>
+					<td>{{ location.nom }}</td>
+					<td>{{ location.dateDebut.format("d-m-y") }}</td>
+					<td>{{ location.dateFin.format("d-m-y") }}</td>
+					{% if location.paye == 1 %}
+						<td>Oui</td>
+					{% else %}
+						<td>Non</td>
+					{% endif %}
+					<td>
+						<button onclick="document.location = '{{ path('location_show', {'id' : location.id}) }}'">Détails</button>
+					</td>
+				</tr>
+			</tbody>
 		{% endfor %}
 	</table>
 	<button class="bottom_button" onclick="document.location = 'location/add'">Nouvelle location</button>
