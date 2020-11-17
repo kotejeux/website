@@ -41,6 +41,8 @@ class LocationController extends AbstractController
             $jeu = $this->getDoctrine()->getRepository(Jeu::class)->find($jeuId);
         }
 
+        $entityManager = $this->getDoctrine()->getManager();
+
         $location = new Location();
 
         $form = $this->createForm(CreateLocationType::class, $location, array(
@@ -64,7 +66,7 @@ class LocationController extends AbstractController
     }
 
     /**
-     * @Route("location/{id}", name="location_show")
+     * @Route("location/{id}/", name="location_show")
      */
     public function show_location(int $id)
     {
@@ -75,5 +77,44 @@ class LocationController extends AbstractController
         return $this->render("location/details.html.twig", [
             "location" => $location,
         ]);
+    }
+
+    /**
+     * @Route("location/{id}/paiement", name="location_paiement")
+     */
+    public function location_is_payed(int $id)
+    {
+        $this->denyAccessUnlessGranted("ROLE_KEJ");
+
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $location = $this->getDoctrine()->getRepository(Location::class)->find($id);
+
+        $location->setPaye(true);
+
+        $entityManager->persist($location);
+
+        $entityManager->flush();
+
+        return $this->redirectToRoute('location_show', ["id" => $id]);
+    }
+
+    /**
+     * @Route("location/{id}/retour", name="location_retour")
+     */
+    public function retour_location(int $id)
+    {
+        $this->denyAccessUnlessGranted("ROLE_KEJ");
+
+        $em = $this->getDoctrine()->getManager();
+
+        $location = $this->getDoctrine()->getRepository(Location::class)->find($id);
+
+        $location->setOk(true);
+
+        $em->persist($location);
+        $em->flush();
+
+        return $this->redirectToRoute('location_show', ["id" => $id]);
     }
 }
