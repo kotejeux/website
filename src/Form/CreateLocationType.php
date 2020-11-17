@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Jeu;
 use App\Entity\Location;
+use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -17,15 +18,17 @@ class CreateLocationType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $today = new \DateTimeImmutable();
         $builder
             ->add('jeu', EntityType::class, [
                 'class' => Jeu::class,
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('u')->orderBy('u.titre', 'ASC');
+                },
                 'choice_label' => "titre",
             ])
             ->add('date_debut', DateType::class, [
                 'widget' => 'single_text',
-                'data' => $today,
+                'data' => new \DateTimeImmutable(),
             ])
             ->add('date_fin', DateType::class, [
                 'widget' => 'single_text',
@@ -37,7 +40,7 @@ class CreateLocationType extends AbstractType
                     'Non' => false,
                 ],
                 'expanded' => true,
-                'label' => 'Payé ?'
+                'label' => 'Payé ?',
             ])
             ->add('nom', TextType::class)
             ->add('mail', TextType::class, [
