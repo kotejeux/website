@@ -117,4 +117,39 @@ class LocationController extends AbstractController
 
         return $this->redirectToRoute('location_show', ["id" => $id]);
     }
+
+    /**
+     * @Route("location/{id}/edit" , name="location_edit")
+     */
+    public function update_location(int $id, Request $request)
+    {
+        $this->denyAccessUnlessGranted("ROLE_KEJ");
+
+        $em = $this->getDoctrine()->getManager();
+
+        $location = $em->getRepository(Location::class)->find($id);
+
+        if (!$location) {
+            throw $this->createNotFoundException(
+                "Pas de location correspondant à l'id."
+            );
+        }
+
+        $form = $this->createForm(CreateLocationType::class, $location);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid())
+        {
+            $location= $form->getData();
+            $em->persist($location);
+            $em->flush();
+
+            return $this->redirectToRoute("location");
+        }
+
+        return $this->render("jeu/update.html.twig", [
+            "location" => $location,
+            "form" => $form->createView()
+        ]);
+    }
 }
