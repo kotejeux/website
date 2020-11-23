@@ -127,7 +127,7 @@ class LocationController extends AbstractController
 
         $em = $this->getDoctrine()->getManager();
 
-        $location = $em()->getRepository(Location::class)->find($id);
+        $location = $em->getRepository(Location::class)->find($id);
 
         if (!$location) {
             throw $this->createNotFoundException(
