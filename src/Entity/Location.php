@@ -24,7 +24,7 @@ class Location
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Jeu", inversedBy="locations")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
      */
     private $jeu;
 
