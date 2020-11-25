@@ -3,6 +3,7 @@
 	<head>
 		<meta charset="UTF-8"/>
 		<meta type="robots" content="noindex">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>
 			{% block title %}Kotéjeux
 			{% endblock %}
@@ -17,10 +18,12 @@
 			<div id="bloc_page">
 				<header>
 					<div id="main_title">
-						<div class="logo">
-							<img src="{{ asset('pictures/logo.png') }}" alt="Logo du KEJ"/>
-						</div>
-						<h1>Kotejeux</h1>
+						<a href="{{ path('index') }}">
+							<div class="logo">
+								<img src="{{ asset('pictures/logo.png') }}" alt="Logo du KEJ"/>
+							</div>
+							<h1>Kotejeux</h1>
+						</a>
 					</div>
 					<nav id="subtitle">
 						{% if not is_granted("IS_AUTHENTICATED_FULLY") %}
@@ -52,6 +55,9 @@
 							{% endif %}
 							<li>
 								<a href="{{ path('blog_index') }}">Blog</a>
+							</li>
+							<li>
+								<a href="">Contact</a>
 							</li>
 						</ul>
 					{% endblock %}
