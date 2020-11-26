@@ -27,6 +27,20 @@ class LocationController extends AbstractController
     }
 
     /**
+     * @Route("/location/jeux", name="location_jeux")
+     */
+    public function index_jeux(): Response
+    {
+        $this->denyAccessUnlessGranted("ROLE_KEJ");
+
+        $locations = $this->getDoctrine()->getRepository(Location::class)->findLocatedGamesByGamesTitle();
+
+        return $this->render("location/index.html.twig", [
+            "locations" => $locations,
+        ]);
+    }
+
+    /**
      * @Route("/location/add/{jeuId}", name="location_add")
      */
     public function add_location(Request $request, $jeuId = null)
