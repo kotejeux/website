@@ -69,6 +69,8 @@ footer a {
 
 #main_title h1 {
   margin: 25px 0 0 0;
+  color: black;
+  text-decoration: none;
 }
 
 #content {
@@ -129,10 +131,6 @@ p {
   font-family: "Roboto", sans-serif;
 }
 
-a {
-  font-family: "Roboto", sans-serif;
-}
-
 .bottom_button {
   margin: 0 auto;
   display: block;
@@ -140,4 +138,8 @@ a {
 
 footer .network_logo {
   height: 19px;
+}
+
+.main_logo {
+  text-decoration: none;
 }

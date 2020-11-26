@@ -9,22 +9,21 @@
 			{% endblock %}
 		</title>
 		<link rel="preconnect" href="https://fonts.gstatic.com">
-		<link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&family=Open+Sans&display=swap" rel="stylesheet">
-		<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@700&family=Roboto&display=swap" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&family=Open+Sans:wght@700&family=Roboto&display=swap" rel="stylesheet">
 		<link href="{{ asset('css/error.css') }}" rel="stylesheet"/>
 		<link href="{{ asset('css/style.css') }}" rel="stylesheet"/> {% block stylesheets %}{% endblock %}
 		</head>
 		<body>
 			<div id="bloc_page">
 				<header>
-					<div id="main_title">
-						<a href="{{ path('index') }}">
+					<a href="{{ path('index') }}" class="main_logo">
+						<div id="main_title">
 							<div class="logo">
 								<img src="{{ asset('pictures/logo.png') }}" alt="Logo du KEJ"/>
 							</div>
 							<h1>Kotejeux</h1>
-						</a>
-					</div>
+						</div>
+					</a>
 					<nav id="subtitle">
 						{% if not is_granted("IS_AUTHENTICATED_FULLY") %}
 							<a href="/login">Connexion</a>
@@ -70,11 +69,13 @@
 						{% block footer %}
 							<a href="index">Page principale</a>
 							<a href="about">À propos</a>
-							<a href="https://www.facebook.com/kote.jeux"><img src="{{ asset('pictures/f_logo_RGB-White_58.png') }}" class="network_logo" alt="facebook logo"></img></a>
-							<a href="https://www.instagram.com/moumouchedukej/"><img src="{{ asset('pictures/instagram_logo_white.png') }}" class="network_logo" alt="instagram logo"></img></a>
-						{% endblock %}
-					</footer>
-				</div>
-				{% block javascripts %}{% endblock %}
+							<a href="https://www.facebook.com/kote.jeux"><img src="{{ asset('pictures/f_logo_RGB-White_58.png') }}" class="network_logo" alt="facebook logo"></img>
+						</a>
+						<a href="https://www.instagram.com/moumouchedukej/"><img src="{{ asset('pictures/instagram_logo_white.png') }}" class="network_logo" alt="instagram logo"></img>
+					</a>
+				{% endblock %}
 			</body>
 		</html>
+	</footer>
+</div>
+{% block javascripts %}{% endblock %}</body></html>
