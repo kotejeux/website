@@ -137,3 +137,7 @@ a {
   margin: 0 auto;
   display: block;
 }
+
+footer .network_logo {
+  height: 19px;
+}
