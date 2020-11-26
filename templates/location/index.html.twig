@@ -37,5 +37,7 @@
 			</tbody>
 		{% endfor %}
 	</table>
-	<button class="bottom_button" onclick="document.location = 'location/add'">Nouvelle location</button>
+	<button class="bottom_button" onclick="document.location = '{{ path('location_jeux') }}'">Classer par jeu</button>
+	<button class="bottom_button" onclick="document.location = '{{ path('location') }}'">Classer par date</button><br />
+	<button class="bottom_button" onclick="document.location = '{{ path('location_add') }}'">Nouvelle location</button>
 {% endblock %}

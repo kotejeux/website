@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Location;
+use App\Entity\Jeu;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 
@@ -47,4 +48,20 @@ class LocationRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    /**
+     * return Location[]
+     */
+    public function findLocatedGamesByGamesTitle(): array
+    {
+        $qb = $this->createQueryBuilder('l')
+            ->andWhere('l.ok = :ok')
+            ->setParameter('ok', false)
+            ->join('App\Entity\Jeu', 'jeu')
+            ->orderBy('jeu.titre', 'ASC');
+
+        $query = $qb->getQuery();
+
+        return $query->execute();
+    }
 }

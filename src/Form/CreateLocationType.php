@@ -44,12 +44,15 @@ class CreateLocationType extends AbstractType
                 'expanded' => true,
                 'label' => 'Payé ?',
             ])
-            ->add('nom', TextType::class)
+            ->add('nom', TextType::class, [
+                "label" => 'Nom * '
+            ])
             ->add('mail', TextType::class, [
                 'required' => false,
             ])
             ->add('phone', TextType::class, [
                 'required' => false,
+                'label' => "GSM "
             ])
             ->add('save', SubmitType::class);
     }
