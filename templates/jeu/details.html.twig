@@ -2,53 +2,60 @@
 {% block javascripts %}
 	<script>
 		function confirm_delete_jeu() {
-			if (confirm("Supprimer le jeu ?\nAttention, cette action est définitive !")) {
-				window.location.replace("{{ jeu.id }}/delete");
-			}
-		}
+if (confirm("Supprimer le jeu ?\nAttention, cette action est définitive !")) {
+window.location.replace("{{ jeu.id }}/delete");
+}
+}
 	</script>
 {% endblock %}
 {% block page_title %}
 	<h2>{{ jeu.titre|capitalize }}</h2>
 {% endblock %}
 {% block content %}
-<div class='sidebyside'>
-	<article>
-		<p>
-			De
-			{{ jeu.joueursMin }}
-			à
-			{{ jeu.joueursMax }}
-			joueurs.
-		</p>
-		<p>Durée :
-			{{ jeu.duree }}
-			min.
-		</p>
-		{% if jeu.annee %}
-			<p>Sortie en
-				{{ jeu.annee }}</p>
-		{% endif %}
-		{% if editeur %}
-			<p>Édité par
-				{{editeur.name}}
-			</p>
-		{% endif %}
-		{% if jeu.description %}
+	<div class='sidebyside'>
+		<article>
 			<p>
-				Description :<br/>
-				{{ jeu.description }}</p>
-		{% endif %}
+				De
+				{{ jeu.joueursMin }}
+				à
+				{{ jeu.joueursMax }}
+				joueurs.
+			</p>
+			<p>Durée :
+				{{ jeu.duree }}
+				min.
+			</p>
+			{% if jeu.annee %}
+				<p>Sortie en
+					{{ jeu.annee }}</p>
+			{% endif %}
+			{% if editeur %}
+				<p>Édité par
+					{{editeur.name}}
+				</p>
+			{% endif %}
+			{% if jeu.description %}
+				<p>
+					Description :<br/>
+					{{ jeu.description }}</p>
+			{% endif %}
+			{% if loue == FALSE %}
+				<p class='ok'>Jeu disponible</p>
+			{% else %}
+				<p class='ko'>Jeu indisponible actuellement</p>
+			{% endif %}
 
-		<!-- TODO: ajouter auteur -->
-		<!-- TODO: ajouter genre -->
-	</article>
-	{% if is_granted("ROLE_KEJ") %}
-		<aside>
-			<button onclick="document.location = '{{ jeu.id }}/edit'">Modifier</button>
-			<button onclick="confirm_delete_jeu()">Supprimer</button>
-			<button onclick="document.location = '{{ path("location_add", {jeu: jeu.id}) }}'">Nouvelle location</button>
-		</aside>
-	{% endif %}
+			<!-- TODO: ajouter auteur -->
+			<!-- TODO: ajouter genre -->
+		</article>
+		{% if is_granted("ROLE_KEJ") %}
+			<aside>
+				<button onclick="document.location = '{{ jeu.id }}/edit'">Modifier</button>
+				<button onclick="confirm_delete_jeu()">Supprimer</button>
+				{% if loue == FALSE %}
+					<button onclick="document.location = '{{ path("location_add", {jeu: jeu.id}) }}'">Nouvelle location</button>
+				{% endif %}
+			</aside>
+		{% endif %}
 	</div>
 {% endblock %}

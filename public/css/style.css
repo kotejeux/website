@@ -143,3 +143,11 @@ footer .network_logo {
 .main_logo {
   text-decoration: none;
 }
+
+.ok {
+  color: green;
+}
+
+.ko {
+  color: red;
+}
