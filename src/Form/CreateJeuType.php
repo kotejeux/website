@@ -2,17 +2,17 @@
 
 namespace App\Form;
 
-use App\Entity\Jeu;
+use App\Entity\Auteur;
 use App\Entity\Editeur;
 use App\Entity\Genre;
-use App\Entity\Auteur;
-
+use App\Entity\Jeu;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class CreateJeuType extends AbstractType
@@ -21,9 +21,9 @@ class CreateJeuType extends AbstractType
     {
         $builder
             ->add('titre', TextType::class, [
-                "label" => "Nom du jeu *"
+                "label" => "Nom du jeu *",
             ])
-            ->add('description', TextType::class, [
+            ->add('description', TextareaType::class, [
                 "required" => false,
             ])
             ->add('joueurs_min', IntegerType::class, [
