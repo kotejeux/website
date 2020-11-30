@@ -1,13 +1,26 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-	<article>
-		<h2>Bienvenue sur le site du Kot-é-Jeux de Louvain-en-Woluwe</h2>
-		<p>
-			Vous pouvez ici consulter les différents jeux disponibles dans notre ludotèque situé au C4 du centre oeucuménique.
-		</p>
-		<p>
-			Il est également possible d'effectuer des recherches afin de trouver la perle idéale pour votre soirée.
-		</p>
-	</article>
-{% endblock %}
+	<h2>Bienvenue sur le site du Kot-é-Jeux de Louvain-en-Woluwe</h2>
+	<div class='sidebyside'>
+		<article>
+			<p>
+				Vous pouvez ici consulter les différents jeux disponibles dans notre ludotèque situé au C4 du centre oeucuménique.
+			</p>
+			<p>
+				Il est également possible d'effectuer des recherches afin de trouver la perle idéale pour votre soirée.
+			</p>
+		</article>
+		<aside class='squared'>
+			<h3>Tarifs</h3>
+			<p>
+				<ul>
+					<li>Location d'un jeu de société : 1€/semaine</li>
+					<li>Location de tapis "Black Jack", "Poker", "Roulette" : 2€/semaine</li>
+					<li>Location roulette : 5€/semaine</li>
+					<li>Malette Poker : 3€/semaine</li>
+				</ul>
+				Carte étudiant/identité en caution pour chaque location
+			</p>
+		</div>
+	{% endblock %}
