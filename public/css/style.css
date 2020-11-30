@@ -90,6 +90,7 @@ footer a {
 #content aside {
   max-width: max-content;
   padding: 5px;
+  font-family: "Roboto";
 }
 
 #content aside button {
