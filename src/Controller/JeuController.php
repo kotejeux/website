@@ -70,7 +70,6 @@ class JeuController extends AbstractController
         return $this->render("jeu/details.html.twig", [
             "jeu" => $jeu,
             "editeur" => $jeu->getEditeur(),
-            "loue" => $jeu->isLocated(),
         ]);
     }
 

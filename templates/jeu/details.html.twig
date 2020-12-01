@@ -39,7 +39,7 @@ window.location.replace("{{ jeu.id }}/delete");
 					Description :<br/>
 					{{ jeu.description }}</p>
 			{% endif %}
-			{% if loue == FALSE %}
+			{% if jeu.isLocated == FALSE %}
 				<p class='ok'>Jeu disponible</p>
 			{% else %}
 				<p class='ko'>Jeu indisponible actuellement</p>
@@ -52,7 +52,7 @@ window.location.replace("{{ jeu.id }}/delete");
 			<aside>
 				<button onclick="document.location = '{{ jeu.id }}/edit'">Modifier</button>
 				<button onclick="confirm_delete_jeu()">Supprimer</button>
-				{% if loue == FALSE %}
+				{% if jeu.isLocated == FALSE %}
 					<button onclick="document.location = '{{ path("location_add", {jeu: jeu.id}) }}'">Nouvelle location</button>
 				{% endif %}
 			</aside>
