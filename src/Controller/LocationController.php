@@ -27,6 +27,20 @@ class LocationController extends AbstractController
     }
 
     /**
+     * @Route("/location/all", name="location_all")
+     */
+    public function index_all(): Response
+    {
+        $this->denyAccessUnlessGranted("ROLE_KEJ");
+
+        $locations = $this->getDoctrine()->getRepository(Location::class)->findAll();
+
+        return $this->render('location/index.html.twig', [
+            'locations' => $locations,
+        ]);
+    }
+
+    /**
      * @Route("/location/jeux", name="location_jeux")
      */
     public function index_jeux(): Response
@@ -152,9 +166,8 @@ class LocationController extends AbstractController
         $form = $this->createForm(CreateLocationType::class, $location);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid())
-        {
-            $location= $form->getData();
+        if ($form->isSubmitted() && $form->isValid()) {
+            $location = $form->getData();
             $em->persist($location);
             $em->flush();
 
@@ -163,7 +176,7 @@ class LocationController extends AbstractController
 
         return $this->render("jeu/update.html.twig", [
             "location" => $location,
-            "form" => $form->createView()
+            "form" => $form->createView(),
         ]);
     }
 }
