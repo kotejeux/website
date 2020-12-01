@@ -39,26 +39,20 @@
 				</header>
 				<nav id="sidebar">
 					{% block sidebar %}
-						<ul>
-							<li>
-								<a href="{{ path('index') }}">Home</a>
-							</li>
-							<li>
-								<a href="{{ path('jeu') }}">Jeux</a>
-							</li>
-							<!--<li><a href="{{ path('editeur') }}">Éditeurs</a></li>-->
-							{% if is_granted("ROLE_KEJ") %}
-								<li>
-									<a href="{{ path('location') }}">Locations</a>
-								</li>
-							{% endif %}
-							<li>
-								<a href="{{ path('blog_index') }}">Blog</a>
-							</li>
-							<li>
-								<a href="{{ path('contact') }}">Contact</a>
-							</li>
-						</ul>
+						<a href="{{ path('index') }}">Home</a>
+						<a href="{{ path('jeu') }}">Jeux</a>
+						<!--<li><a href="{{ path('editeur') }}">Éditeurs</a></li>-->
+						{% if is_granted("ROLE_KEJ") %}
+							<div class="dropdown">
+								<button class="dropbtn" onclick="document.location='{{ path('location') }}'">Locations</button>
+								<div class="dropdown-content">
+									<a href="#">Historique des locations</a>
+									<a href="{{ path('location') }}">Locations en cours</a>
+								</div>
+							</div>
+						{% endif %}
+						<a href="{{ path('blog_index') }}">Blog</a>
+						<a href="{{ path('contact') }}">Contact</a>
 					{% endblock %}
 				</nav>
 
