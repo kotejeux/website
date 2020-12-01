@@ -246,4 +246,22 @@ class Jeu
 
         return $this;
     }
+
+    public function isLocated(): bool
+    {
+        $locationAll = $this->getLocations();
+
+        $isLocated = false;
+        $locationSize = count($locationAll);
+
+        if ($locationSize > 0) {
+            for ($i = 0; $i < $locationSize; $i++) {
+                if ($locationAll[$i]->getOk() == false) {
+                    $isLocated = true;
+                }
+            }
+        }
+
+        return $isLocated;
+    }
 }

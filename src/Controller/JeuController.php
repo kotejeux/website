@@ -66,21 +66,11 @@ class JeuController extends AbstractController
         }
 
         $locations = $this->getDoctrine()->getRepository(Location::class)->findBy(array('jeu' => $id));
-
-        $loue = FALSE;
-        $location_nbr = count($locations);
-        if ($location_nbr > 0) {
-            for ($i = 0; $i < $location_nbr; $i++) {
-                if ($locations[$i]->getOk() == 0) {
-                    $loue = TRUE;
-                }
-            } 
-        }
         
         return $this->render("jeu/details.html.twig", [
             "jeu" => $jeu,
             "editeur" => $jeu->getEditeur(),
-            "loue" => $loue,
+            "loue" => $jeu->isLocated(),
         ]);
     }
 
