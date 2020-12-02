@@ -249,7 +249,7 @@ class Jeu
 
     public function isLocated(): bool
     {
-        $locationAll = $this->getLocations();
+        $locationAll = $this->locations;
 
         $isLocated = false;
         $locationSize = count($locationAll);
