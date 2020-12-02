@@ -176,4 +176,16 @@ class Location
 
         return $this;
     }
+
+    public function enRetard(): bool
+    {
+        $today = new \DateTime();
+        $today->setTime(0, 0);
+
+        if ($this->date_fin > $today) {
+            return false;
+        } else {
+            return true;
+        }
+    }
 }

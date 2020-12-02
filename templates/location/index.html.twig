@@ -24,7 +24,11 @@
 					<td>{{ location.jeu.titre }}</td>
 					<td>{{ location.nom }}</td>
 					<td>{{ location.dateDebut.format("d-m-y") }}</td>
-					<td>{{ location.dateFin.format("d-m-y") }}</td>
+					{% if location.enRetard %}
+						<td class='ko'>{{ location.dateFin.format("d-m-y") }}</td>
+					{% else %}
+						<td>{{ location.dateFin.format("d-m-y") }}</td>
+					{% endif %}
 					{% if location.paye == 1 %}
 						<td>Oui</td>
 					{% else %}
@@ -38,6 +42,6 @@
 		{% endfor %}
 	</table>
 	<button class="bottom_button" onclick="document.location = '{{ path('location_jeux') }}'">Classer par jeu</button>
-	<button class="bottom_button" onclick="document.location = '{{ path('location') }}'">Classer par date</button><br />
+	<button class="bottom_button" onclick="document.location = '{{ path('location') }}'">Classer par date</button><br/>
 	<button class="bottom_button" onclick="document.location = '{{ path('location_add') }}'">Nouvelle location</button>
 {% endblock %}
