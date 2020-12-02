@@ -55,6 +55,24 @@ class LocationController extends AbstractController
     }
 
     /**
+     * @Route("location/retard", name="location_retard")
+     */
+    public function index_retard(): Response
+    {
+        $this->denyAccessUnlessGranted("ROLE_KEJ");
+
+        $locations = $this->getDoctrine()->getRepository(Location::class)->findBy(array('ok' => false));
+
+        $locationsEnRetard = array_filter($locations, function ($v) {
+            return $v->enRetard();
+        });
+
+        return $this->render("location/index.html.twig", [
+            "locations" => $locationsEnRetard,
+        ]);
+    }
+
+    /**
      * @Route("/location/add/{jeuId}", name="location_add")
      */
     public function add_location(Request $request, $jeuId = null)
