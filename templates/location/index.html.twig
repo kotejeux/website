@@ -24,7 +24,7 @@
 					<td>{{ location.jeu.titre }}</td>
 					<td>{{ location.nom }}</td>
 					<td>{{ location.dateDebut.format("d-m-y") }}</td>
-					{% if location.enRetard %}
+					{% if location.enRetard and location.ok == FALSE %}
 						<td class='ko'>{{ location.dateFin.format("d-m-y") }}</td>
 					{% else %}
 						<td>{{ location.dateFin.format("d-m-y") }}</td>
