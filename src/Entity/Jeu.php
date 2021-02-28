@@ -68,6 +68,11 @@ class Jeu
      */
     private $auteur;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $copies;
+
     public function __construct()
     {
         $this->locations = new ArrayCollection();
@@ -263,5 +268,17 @@ class Jeu
         }
 
         return $isLocated;
+    }
+
+    public function getCopies(): ?int
+    {
+        return $this->copies;
+    }
+
+    public function setCopies(int $copies): self
+    {
+        $this->copies = $copies;
+
+        return $this;
     }
 }
