@@ -37,6 +37,26 @@ class SecurityController extends AbstractController
     }
 
     /**
+     * @Route("/api/login", name="loginAPI", methods={"POST"})
+     */
+    public function APIlogin(AuthenticationUtils $authenticationUtils, Request $request): Response
+    {
+        if ($this->getUser()) {
+            $user = $this->getUser();
+
+            return $this->json("authenticated");
+        } else {
+            $error = $authenticationUtils->getLastAuthenticationError();
+            $lastUsername = $authenticationUtils->getLastUsername();
+
+            return $this->json([
+                "error" => $error,
+                "lastUsername" => $lastUsername,
+            ]);
+        }
+    }
+
+    /**
      * @Route("/user/new", name="create_user")
      */
     public function createUser(Request $request, UserPasswordEncoderInterface $passwordEncoder)
@@ -91,7 +111,7 @@ class SecurityController extends AbstractController
     public function confirm_user(Request $request, UserPasswordEncoderInterface $passwordEncoder, String $security_token)
     {
         $repository = $this->getDoctrine()->getRepository(User::class);
-        
+
         $user = $repository->findOneBy(["connectionToken" => $security_token]);
 
         $entityManager = $this->getDoctrine()->getManager();
@@ -105,7 +125,7 @@ class SecurityController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $userInfo = $form->getData();
 
-            if ($userInfo->getPassword() == $form->get("confirm_password")->getData()){
+            if ($userInfo->getPassword() == $form->get("confirm_password")->getData()) {
                 $user->setPassword(
                     $passwordEncoder->encodePassword(
                         $user,
@@ -113,16 +133,15 @@ class SecurityController extends AbstractController
                     )
 
                 );
-                $user->setConnectionToken(NULL);
+                $user->setConnectionToken(null);
 
                 $entityManager->persist($user);
                 $entityManager->flush();
-            }
-            else {
+            } else {
                 return $this->render('user/password.html.twig', [
-                    'username' =>$user->getUsername(),
+                    'username' => $user->getUsername(),
                     'form' => $form->createView(),
-                    'error' => "Les mots de passe ne correspondent pas."
+                    'error' => "Les mots de passe ne correspondent pas.",
                 ]);
             }
         }
@@ -147,11 +166,11 @@ class SecurityController extends AbstractController
                 <p>Someone created an account for this email address</p>
 
                 <p>
-                    If it was you, you can set your password on clicking the following <a href=http://localhost:8000/user/confirm/'.$connection_token.'>link</a>.
+                    If it was you, you can set your password on clicking the following <a href=http://localhost:8000/user/confirm/' . $connection_token . '>link</a>.
                 </p>
                 <p>
                     If the link doesn\'t work, copy paste in your browser.
-                    <code>http://localhost:8000/user/confirm/'.$connection_token.'</code>
+                    <code>http://localhost:8000/user/confirm/' . $connection_token . '</code>
                 </p>
                 <p>
                     If it wasn\'t you, you can ignore this email
