@@ -12,6 +12,7 @@ framework:
         cookie_samesite: none
         name: kej-cookie
         cookie_httponly: false
+        cookie_lifetime: 3600
 
     #esi: true
     #fragments: true
