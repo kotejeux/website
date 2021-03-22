@@ -12,5 +12,6 @@ nelmio_cors:
             allow_origin: ['*']
             allow_headers: ['*']
             allow_methods: ['POST', 'GET']
+            allow_credentials: true
 
 
