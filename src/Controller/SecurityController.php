@@ -44,12 +44,16 @@ class SecurityController extends AbstractController
         if ($this->getUser()) {
             $user = $this->getUser();
 
-            return $this->json("authenticated");
+            return $this->json([
+                "status" => "authenticated",
+                "username" => $user->getUsername()
+            ]);
         } else {
             $error = $authenticationUtils->getLastAuthenticationError();
             $lastUsername = $authenticationUtils->getLastUsername();
 
             return $this->json([
+                "status" => false,
                 "error" => $error,
                 "lastUsername" => $lastUsername,
             ]);
