@@ -9,7 +9,7 @@ framework:
         enabled: true
         handler_id: null
         cookie_secure: auto
-        cookie_samesite: lax
+        cookie_samesite: None
 
     #esi: true
     #fragments: true
