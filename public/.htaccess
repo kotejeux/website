@@ -66,5 +66,5 @@ DirectoryIndex index.php
 </IfModule>
 <IfModule mod_headers.c>
     Header set Access-Control-Allow-Origin 'https://staff.kotejeux.be'
-    Header set Access-Control-Allow-Credentials "true"
+    Header set Access-Control-Allow-Credentials true
 </IfModule>
