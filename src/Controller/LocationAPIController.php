@@ -68,4 +68,22 @@ class LocationAPIController extends AbstractController
 
         return $response;
     }
+
+    /**
+     * @Route("api/location/{id}/paiement", name="location_paiementAPI", method="['POST']")
+     */
+    public function location_is_payed(int $id)
+    {
+        $this->denyAccessUnlessGranted("ROLE_KEJ");
+
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $location = $this->getDoctrine()->getRepository(Location::class)->find($id);
+
+        $location->setPaye(true);
+
+        $entityManager->persist($location);
+
+        $entityManager->flush();
+    }
 }
