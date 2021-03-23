@@ -92,7 +92,7 @@ class LocationAPIController extends AbstractController
     }
 
     /**
-     * @Route("api/location/{id}/ertour", name="location_retourAPI", methods={"POST"})
+     * @Route("api/location/{id}/retour", name="location_retourAPI", methods={"POST"})
      */
     public function location_ended(int $id)
     {
