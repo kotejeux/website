@@ -4,13 +4,13 @@ namespace App\Controller;
 
 use App\Entity\Location;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
-use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 
 class LocationAPIController extends AbstractController
 {
@@ -89,7 +89,35 @@ class LocationAPIController extends AbstractController
         $response = new JsonResponse();
 
         return $response->setContent("ok");
+    }
 
+    /**
+     * @Route("api/location/{id}/ertour", name="location_retourAPI", methods={"POST"})
+     */
+    public function location_ended(int $id)
+    {
+        $this->denyAccessUnlessGranted("ROLE_KEJ");
 
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $location = $this->getDoctrine()->getRepository(Location::class)->find($id);
+
+        if ($location->getPaye()) {
+            $location->setOk(true);
+
+            $entityManager->persist($location);
+
+            $entityManager->flush();
+
+            $response = new JsonResponse();
+
+            return $response->setContent("ok");
+        } else {
+            $response = new JsonResponse();
+
+            $response->setContent("not ok");
+
+            return $response;
+        }
     }
 }
