@@ -70,7 +70,7 @@ class LocationAPIController extends AbstractController
     }
 
     /**
-     * @Route("api/location/{id}/paiement", name="location_paiementAPI", methods="['POST']")
+     * @Route("api/location/{id}/paiement", name="location_paiementAPI", methods={'POST'})
      */
     public function location_is_payed(int $id)
     {
