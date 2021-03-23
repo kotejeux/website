@@ -85,5 +85,11 @@ class LocationAPIController extends AbstractController
         $entityManager->persist($location);
 
         $entityManager->flush();
+
+        $response = new JsonResponse();
+
+        return $response->setContent("ok");
+
+
     }
 }
